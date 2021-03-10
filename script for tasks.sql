@@ -29,8 +29,19 @@ FROM courses c
 LEFT JOIN grades g
 ON grades_courses_id = courses_id
 GROUP BY c.courses_name
-ORDER BY g.grades_percentage ASC
+ORDER BY g.grades_percentage ASC;
 
 -- task 5, create a script for Finding which student and professor have the most courses in common
-
-
+SELECT 
+	c.courses_name, 
+	p.professors_email, 
+	s.students_first_name, 
+	s.students_last_name,
+	COUNT(*) AS courses_in_common
+FROM students s 
+LEFT JOIN courses c
+ON c.courses_id = s.students_courses_1_id OR c.courses_id = s.students_courses_2_id
+LEFT JOIN professors p 
+ON c.courses_professors_id = p.professors_id
+GROUP BY p.professors_id, s.students_id
+ORDER BY courses_in_common DESC;

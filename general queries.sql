@@ -50,3 +50,5 @@ SELECT *
 FROM students
 LEFT join grades
 on grades_id = students_grades_1_id OR grades_id = students_grades_2_id;
+
+
